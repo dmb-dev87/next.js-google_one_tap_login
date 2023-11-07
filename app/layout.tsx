@@ -9,6 +9,8 @@ import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
 import AppContextProvider from '@/context/app/AppContextProvider'
+import Script from 'next/script'
+import { OneTapComponent } from '@/components/one-tap-component'
 
 export const metadata: Metadata = {
   title: {
@@ -34,7 +36,9 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <Script src="https://accounts.google.com/gsi/client" async defer />
+      </head>
       <body
         className={cn(
           'font-sans antialiased',
@@ -44,11 +48,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <Toaster />
         <Providers attribute="class" defaultTheme="system" enableSystem>
+          
           <AppContextProvider>
             <div className="flex flex-col min-h-screen">
               {/* @ts-ignore */}
               <Header />
-              <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
+              <main className="flex flex-col flex-1 bg-muted/50">
+                <OneTapComponent />
+                {children}
+              </main>
             </div>
             <TailwindIndicator />
           </AppContextProvider>
