@@ -23,7 +23,7 @@ const useOneTapSignin = (
             callback: async (response: any) => {
               setIsLoading(true);
 
-              await signIn('google', { callbackUrl: '/' })
+              await signIn('google', { callbackUrl: '/' });
 
               // await signIn("googleonetap", {
               //     credential: response.credential,
