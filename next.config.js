@@ -15,4 +15,15 @@ module.exports = {
       },
     ],
   },
+  env: {
+    BASE_URL: process.env.BASE_URL
+  },
+  webpack(config) {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      http: require.resolve("stream-http"),
+      fs: require.resolve("browserify-fs"),
+    };
+    return config;
+  },
 };

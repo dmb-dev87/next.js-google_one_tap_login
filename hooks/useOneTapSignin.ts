@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession, signIn, SignInOptions } from "next-auth/react";
 
 interface OneTapSigninOptions {
@@ -23,13 +23,13 @@ const useOneTapSignin = (
             callback: async (response: any) => {
               setIsLoading(true);
 
-              await signIn('google', { callbackUrl: '/' });
+              console.log("++++++++++++", response)
 
-              // await signIn("googleonetap", {
-              //     credential: response.credential,
-              //     redirect: true,
-              //     ...options,
-              // });
+              await signIn("googleonetap", {
+                credential: response.credential,
+                redirect: false,
+                ...options,
+              });
               setIsLoading(false);
             },
             prompt_parent_id: parentConatinerId,
